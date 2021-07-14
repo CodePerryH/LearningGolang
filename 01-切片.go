@@ -1,11 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	///切片是go中的一个数据结构 和数组的区别是 数组容量固定了 ，而切片可以宽容
 	//切片有3个成员变量(low,hight,cap),low为初始值，cap为容量
-	//切片做函数参数 传递的是引用
+	//切片做函数参数 传递的是引用，数组是值传递
 	//切片的创建
 
 	//1.自动推到
@@ -44,7 +47,12 @@ func main() {
 
 	fmt.Println("s22 = ",s11)
 
-    //copy 练习
+    //map 与 切片的练习
+    juzi := "I  love you  go lang  , I world"
+
+    mp := stringUncdShowNumber(juzi)
+
+    fmt.Println("字符串单词出现的次数=\n",mp)
 
 }
 
@@ -87,4 +95,19 @@ func noSame(data []string) []string {
 
 	}
 	return noSm
+}
+
+///计算字符串单词出现的次数
+func stringUncdShowNumber(str string) map[string]int{
+	mp := make(map[string]int)
+	///拆分字符串 strings.Fields() 按空格 返回的是一个string切片
+	for _,str1 := range strings.Fields(str) {
+		///判断当前map中是否包含str1这个key
+		if _,ok := mp[str1];ok {
+			mp[str1] += 1
+		} else  {
+			mp[str1] = 1
+		}
+	}
+	return  mp
 }
